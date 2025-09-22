@@ -4,10 +4,13 @@ instance="https://inv.nadeko.net"
 
 while true; do
 	clear
+
 	read -p 'Search: ' query
+	[ -z "$query" ] && clear && break
+
+	clear
 	echo "loading results ..."
 	search_query=$(echo "$query" | sed 's/ /+/g')
-	[ -z "$search_query" ] && break
 	i=1
 
 	while [ "$i" = 1 ]; do
@@ -30,6 +33,7 @@ while true; do
 
 		url=$(echo "$all_url" | grep -e "^$number\s" | awk '{print $2}')
 
+		clear
 		echo "loading video ..."
 		mpv -fs $url
 	done
